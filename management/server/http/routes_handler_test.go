@@ -27,12 +27,13 @@ const (
 	existingRouteID = "existingRouteID"
 	notFoundRouteID = "notFoundRouteID"
 	existingPeerIP  = "100.64.0.100"
-	existingPeerID  = "peer-id"
 	notFoundPeerID  = "nonExistingPeer"
 	existingPeerKey = "existingPeerKey"
 	testAccountID   = "test_id"
 	existingGroupID = "testGroup"
 )
+
+var existingPeerID = "peer-id"
 
 var baseExistingRoute = &route.Route{
 	ID:          existingRouteID,
@@ -206,7 +207,7 @@ func TestRoutesHandlers(t *testing.T) {
 				Description: "Post",
 				NetworkId:   "awesomeNet",
 				Network:     "192.168.0.0/16",
-				Peer:        existingPeerID,
+				Peer:        &existingPeerID,
 				NetworkType: route.IPv4NetworkString,
 				Masquerade:  false,
 				Enabled:     false,
@@ -249,7 +250,7 @@ func TestRoutesHandlers(t *testing.T) {
 				Description: "Post",
 				NetworkId:   "awesomeNet",
 				Network:     "192.168.0.0/16",
-				Peer:        existingPeerID,
+				Peer:        &existingPeerID,
 				NetworkType: route.IPv4NetworkString,
 				Masquerade:  false,
 				Enabled:     false,
