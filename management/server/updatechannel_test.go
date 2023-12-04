@@ -7,8 +7,6 @@ import (
 	"github.com/netbirdio/netbird/management/proto"
 )
 
-//var peersUpdater *PeersUpdateManager
-
 func TestCreateChannel(t *testing.T) {
 	peer := "test-create"
 	peersUpdater := NewPeersUpdateManager(nil)
@@ -74,5 +72,20 @@ func TestCloseChannel(t *testing.T) {
 	peersUpdater.CloseChannel(peer)
 	if _, ok := peersUpdater.peerChannels[peer]; ok {
 		t.Error("Error closing the channel")
+	}
+}
+
+func TestPeerUpdateManager_HasChannel(t *testing.T) {
+	peer := "test-create"
+	peersUpdater := NewPeersUpdateManager(nil)
+	defer peersUpdater.CloseChannel(peer)
+
+	if peersUpdater.HasChannel(peer) {
+		t.Error("Expected not channel")
+	}
+
+	_ = peersUpdater.CreateChannel(peer)
+	if !peersUpdater.HasChannel(peer) {
+		t.Error("Error creating a channel")
 	}
 }
